@@ -188,7 +188,7 @@ let levelData = [
   },
   { // Nivel 5 - Jefe Final: El Bug Crítico
     platforms: [
-      {x:0,y:470,w:100,h:20,tip:"Revisa logs para diagnosticar el problema."},
+      {x:0,y:470,w:150,h:20,tip:"Revisa logs para diagnosticar el problema."}, // Plataforma inicial más ancha
       {x:200,y:420,w:100,h:20,tip:"Pruebas unitarias pueden prevenir esto."},
       {x:400,y:370,w:100,h:20,tip:"Monitorización en tiempo real ayuda."},
       {x:600,y:320,w:100,h:20,tip:"Rollback puede ser solución temporal."}
@@ -240,7 +240,11 @@ function loadLevel(lv){
   // Asegurar que la primera plataforma esté debajo del jugador
   platforms[0].x = 0;
   platforms[0].y = player.y + player.h;
-  platforms[0].w = 150;
+  
+  // En el nivel 5, ajustamos la posición inicial del jugador
+  if(lv === 4) {
+    player.y = platforms[0].y - player.h;
+  }
   
   // Posicionar enemigos en sus plataformas
   enemies.forEach(enemy => {
