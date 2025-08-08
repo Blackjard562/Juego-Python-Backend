@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego de Python Backend</title>
+<style>
+  body { margin: 0; background: #111; color: white; font-family: Arial, sans-serif; text-align: center;}
+  canvas { background: #222; display: block; margin: 0 auto; border: 3px solid #444; box-shadow: 0 0 20px #ff5500; }
+  #startScreen, #endScreen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center;
+    color: white; font-size: 20px; z-index: 10;
+  }
+  button { 
+    padding: 12px 25px; font-size: 18px; cursor: pointer; 
+    background: linear-gradient(#ff6600, #cc4400); border: none; 
+    color: white; border-radius: 5px; margin-top: 20px;
+    box-shadow: 0 0 10px #ff6600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff8800;
+  }
+  #tipBox {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 5px; 
+    font-size: 16px; display: none; z-index: 5;
+    border: 1px solid #ff6600; box-shadow: 0 0 10px #ff6600;
+    max-width: 80%; text-align: center;
+  }
+  h1 { color: #ff6600; text-shadow: 0 0 10px #ff6600; }
+  .lava { 
+    position: absolute; bottom: 0; width: 100%; height: 30px; 
+    background: linear-gradient(to top, #ff2200, #ff6600);
+    animation: lavaPulse 2s infinite alternate;
+  }
+  @keyframes lavaPulse {
+    from { box-shadow: 0 0 30px #ff2200; }
+    to { box-shadow: 0 0 50px #ff6600; }
+  }
+  #hud {
+    position: absolute; top: 10px; left: 10px; 
+    background: rgba(0,0,0,0.7); padding: 8px 15px;
+    border-radius: 5px; font-size: 16px;
+    border: 1px solid #ff6600;
+  }
+  #bossHealth {
+    position: absolute; top: 50px; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 20px; background: #333;
+    border: 2px solid #ff0000; border-radius: 10px;
+    display: none; z-index: 5;
+  }
+  #bossHealthBar {
+    height: 100%; width: 100%; background: linear-gradient(to right, #ff0000, #ff9900);
+    border-radius: 8px; transition: width 0.3s;
+  }
+</style>
+</head>
+<body>
+
+<div id="startScreen">
+  <h1>Aprende Python Backend 🐍</h1>
+  <p>Salta entre plataformas de conocimiento sobre el mar de lava de los errores.</p>
+  <p>Recoge monedas de código, esquiva bugs y derrota al jefe final!</p>
+  <button onclick="startGame()">Comenzar Juego</button>
+</div>
+
+<div id="tipBox"></div>
+<div id="hud">Puntos: 0 | Vidas: 3 | Nivel: 1</div>
+<div id="bossHealth"><div id="bossHealthBar"></div></div>
+<canvas id="gameCanvas" width="800" height="500"></canvas>
+<div class="lava"></div>
+
+<div id="endScreen" style="display:none;">
+  <h1>¡Juego terminado!</h1>
+  <p id="finalScore"></p>
+  <p id="finalMessage"></p>
+  <button onclick="location.reload()">Jugar de nuevo</button>
+</div>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+let gameRunning = false;
+let score = 0, lives = 3, level = 0;
+let player, platforms, coins, obstacles, goal, enemies, boss, particles = [];
+let keys = {};
+let tipBox = document.getElementById("tipBox");
+let hud = document.getElementById("hud");
+let bossHealthBar = document.getElementById("bossHealth");
+let bossHealth = document.getElementById("bossHealthBar");
+
+// Niveles mejorados con dificultad progresiva
+let levelData = [
+  { // Nivel 1 - Fundamentos
+    platforms: [
+      {x:0,y:470,w:150,h:20,tip:"Base sólida: el servidor y tu entorno de trabajo."},
+      {x:200,y:420,w:100,h:20,tip:"Variables de entorno: guardan credenciales y configs."},
+      {x:350,y:370,w:100,h:20,tip:"Rutas: definen endpoints para tus funciones."},
+      {x:500,y:320,w:100,h:20,tip:"Respuestas HTTP: status codes y JSON."},
+      {x:650,y:270,w:100,h:20,tip:"Métodos HTTP: GET, POST, PUT, DELETE."}
+    ],
+    coins: [
+      {x:220,y:390,tip:"Usa dotenv para manejar variables de entorno."},
+      {x:370,y:340,tip:"En Flask usa @app.route('/')."},
+      {x:520,y:290,tip:"Status 200 OK, 404 Not Found."},
+      {x:670,y:240,tip:"GET para leer, POST para crear."}
+    ],
+    obstacles: [],
+    enemies: [],
+    goal: {x:700,y:220,w:50,h:50,tip:"¡Completaste Fundamentos!"}
+  },
+  { // Nivel 2 - Bases de Datos
+    platforms: [
+      {x:0,y:470,w:120,h:20,tip:"El ORM te ayuda a mapear objetos a tablas."},
+      {x:150,y:420,w:120,h:20,tip:"Modelos: representan tablas en código."},
+      {x:300,y:370,w:120,h:20,tip:"Consultas: filtra datos con SQLAlchemy."},
+      {x:450,y:320,w:120,h:20,tip:"Migraciones: actualiza estructura de BD."},
+      {x:600,y:270,w:120,h:20,tip:"Relaciones: uno a muchos, muchos a muchos."}
+    ],
+    coins: [
+      {x:170,y:390,tip:"class User(db.Model) define un modelo."},
+      {x:320,y:340,tip:"session.query(Model).filter().all()."},
+      {x:470,y:290,tip:"Alembic ayuda con migraciones."},
+      {x:620,y:240,tip:"Relaciones con ForeignKey y relationship()."}
+    ],
+    obstacles: [
+      {x:250,y:440,w:30,h:30,dir:1,speed:2,tip:"Evita errores de integridad."},
+      {x:400,y:440,w:30,h:30,dir:-1,speed:2,tip:"Bloqueos de base de datos."}
+    ],
+    enemies: [
+      {x:180,y:385,w:25,h:25,dir:1,speed:1.5,platform:1,tip:"Error de sintaxis SQL"},
+      {x:480,y:295,w:25,h:25,dir:-1,speed:1,platform:3,tip:"Error de migración"}
+    ],
+    goal: {x:650,y:220,w:50,h:50,tip:"¡Completaste Bases de Datos!"}
+  },
+  { // Nivel 3 - Autenticación
+    platforms: [
+      {x:0,y:470,w:100,h:20,tip:"JWT: tokens para autenticar usuarios."},
+      {x:150,y:420,w:100,h:20,tip:"Encriptación: bcrypt para contraseñas."},
+      {x:300,y:370,w:100,h:20,tip:"Middleware: procesa peticiones."},
+      {x:450,y:320,w:100,h:20,tip:"CORS: habilita acceso seguro entre dominios."},
+      {x:600,y:270,w:100,h:20,tip:"Deploy: sube tu app a la nube."}
+    ],
+    coins: [
+      {x:170,y:390,tip:"JWT almacena datos en el token."},
+      {x:320,y:340,tip:"bcrypt.hashpw(password, salt)."},
+      {x:470,y:290,tip:"Configura CORS con flask-cors."},
+      {x:620,y:240,tip:"Heroku, Render o AWS para deploy."}
+    ],
+    obstacles: [
+      {x:200,y:440,w:30,h:30,dir:1,speed:2.5,tip:"Errores de seguridad son críticos."},
+      {x:350,y:440,w:30,h:30,dir:-1,speed:2,tip:"Evita XSS e inyecciones SQL."},
+      {x:500,y:440,w:30,h:30,dir:1,speed:2,tip:"Protege contra CSRF."}
+    ],
+    enemies: [
+      {x:170,y:395,w:25,h:25,dir:1,speed:1.5,platform:0,tip:"Token expirado"},
+      {x:320,y:345,w:25,h:25,dir:-1,speed:1,platform:1,tip:"Contraseña débil"}
+    ],
+    goal: {x:650,y:220,w:50,h:50,tip:"¡Dominaste la Autenticación!"}
+  },
+  { // Nivel 4 - Rendimiento
+    platforms: [
+      {x:0,y:470,w:100,h:20,tip:"Caché: Redis para respuestas rápidas."},
+      {x:150,y:420,w:100,h:20,tip:"Load balancing: distribuye la carga."},
+      {x:300,y:370,w:100,h:20,tip:"CDN: entrega contenido estático rápido."},
+      {x:450,y:320,w:100,h:20,tip:"Indexación: acelera consultas."},
+      {x:600,y:270,w:100,h:20,tip:"Monitoreo: New Relic, Datadog."}
+    ],
+    coins: [
+      {x:170,y:390,tip:"Redis.set('key', 'value', ex=3600)."},
+      {x:320,y:340,tip:"Nginx como balanceador de carga."},
+      {x:470,y:290,tip:"Cloudflare ofrece CDN gratuito."},
+      {x:620,y:240,tip:"CREATE INDEX en campos usados en WHERE."}
+    ],
+    obstacles: [
+      {x:150,y:440,w:30,h:30,dir:1,speed:2.5,tip:"Lentitud en consultas."},
+      {x:300,y:440,w:30,h:30,dir:-1,speed:2.5,tip:"Timeout de conexión."},
+      {x:450,y:440,w:30,h:30,dir:1,speed:2,tip:"Falta de memoria."}
+    ],
+    enemies: [
+      {x:170,y:395,w:25,h:25,dir:1,speed:1.5,platform:0,tip:"Cache miss"},
+      {x:320,y:345,w:25,h:25,dir:-1,speed:1.5,platform:1,tip:"Servidor caído"},
+      {x:620,y:245,w:25,h:25,dir:-1,speed:1.5,platform:4,tip:"Alto latency"}
+    ],
+    goal: {x:650,y:220,w:50,h:50,tip:"¡Optimizaste el Rendimiento!"}
+  },
+  { // Nivel 5 - Jefe Final: El Bug Crítico
+    platforms: [
+      {x:0,y:470,w:100,h:20,tip:"Revisa logs para diagnosticar el problema."},
+      {x:200,y:420,w:100,h:20,tip:"Pruebas unitarias pueden prevenir esto."},
+      {x:400,y:370,w:100,h:20,tip:"Monitorización en tiempo real ayuda."},
+      {x:600,y:320,w:100,h:20,tip:"Rollback puede ser solución temporal."}
+    ],
+    coins: [
+      {x:220,y:390,tip:"Usa logging.getLogger(__name__)."},
+      {x:420,y:340,tip:"pytest es excelente para tests."},
+      {x:620,y:290,tip:"Sentry para monitoreo de errores."}
+    ],
+    obstacles: [
+      {x:100,y:440,w:30,h:30,dir:1,speed:3,tip:"Error 500 Internal Server Error"},
+      {x:300,y:440,w:30,h:30,dir:-1,speed:3,tip:"Memory Leak"},
+      {x:500,y:440,w:30,h:30,dir:1,speed:3,tip:"Database Deadlock"}
+    ],
+    enemies: [
+      {x:220,y:395,w:25,h:25,dir:1,speed:2,platform:0,tip:"Null Pointer Exception"},
+      {x:420,y:345,w:25,h:25,dir:-1,speed:2,platform:2,tip:"Race Condition"}
+    ],
+    boss: {
+      x: 300, y: 150, w: 150, h: 80,
+      health: 5, maxHealth: 5,
+      speed: 2.5, dir: 1,
+      attackCooldown: 0,
+      tip: "¡BUG CRÍTICO EN PRODUCCIÓN! Debes esquivar sus ataques para llegar al endpoint final."
+    },
+    goal: {x:700,y:150,w:50,h:50,tip:"¡DEPLOY EXITOSO! Has salvado la aplicación."}
+  }
+];
+
+function startGame(){
+  score = 0; lives = 3; level = 0;
+  document.getElementById('startScreen').style.display = 'none';
+  gameRunning = true;
+  loadLevel(level);
+  updateHUD();
+  gameLoop();
+}
+
+function loadLevel(lv){
+  let data = levelData[lv];
+  player = {x:50,y:400,w:30,h:30,dx:0,dy:0,onGround:false,jumping:false, invincible: 0};
+  platforms = JSON.parse(JSON.stringify(data.platforms));
+  coins = JSON.parse(JSON.stringify(data.coins));
+  obstacles = JSON.parse(JSON.stringify(data.obstacles));
+  enemies = data.enemies ? JSON.parse(JSON.stringify(data.enemies)) : [];
+  goal = JSON.parse(JSON.stringify(data.goal));
+  boss = data.boss ? JSON.parse(JSON.stringify(data.boss)) : null;
+  
+  // Asegurar que la primera plataforma esté debajo del jugador
+  platforms[0].x = 0;
+  platforms[0].y = player.y + player.h;
+  platforms[0].w = 150;
+  
+  // Posicionar enemigos en sus plataformas
+  enemies.forEach(enemy => {
+    const platform = platforms[enemy.platform];
+    enemy.y = platform.y - enemy.h;
+    enemy.minX = platform.x;
+    enemy.maxX = platform.x + platform.w - enemy.w;
+  });
+  
+  // Mostrar barra de salud del jefe si existe
+  if(boss) {
+    bossHealth.style.display = 'block';
+    updateBossHealth();
+  } else {
+    bossHealth.style.display = 'none';
+  }
+}
+
+function updateBossHealth() {
+  const percent = (boss.health / boss.maxHealth) * 100;
+  bossHealthBar.style.width = `${percent}%`;
+}
+
+function showTip(text){
+  tipBox.innerText = text;
+  tipBox.style.display = 'block';
+  setTimeout(()=>{ tipBox.style.display='none'; }, 3000);
+}
+
+function updateHUD(){
+  hud.innerHTML = `Puntos: ${score} | Vidas: ${lives} | Nivel: ${level+1}`;
+}
+
+function createParticles(x, y, color, count) {
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: x,
+      y: y,
+      size: Math.random() * 5 + 2,
+      color: color,
+      speedX: Math.random() * 6 - 3,
+      speedY: Math.random() * -6 - 3,
+      life: 30 + Math.random() * 20
+    });
+  }
+}
+
+function updateParticles() {
+  for (let i = 0; i < particles.length; i++) {
+    let p = particles[i];
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.life--;
+    
+    ctx.globalAlpha = p.life / 50;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    
+    if (p.life <= 0) {
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+
+function collide(a,b){
+  return a.x < b.x + b.w && a.x + a.w > b.x &&
+         a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+function gameLoop(){
+  if(!gameRunning) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  
+  // Dibujar fondo con efecto de lava
+  let gradient = ctx.createLinearGradient(0,0,0,canvas.height);
+  gradient.addColorStop(0, "#111111");
+  gradient.addColorStop(0.8, "#330000");
+  gradient.addColorStop(1, "#660000");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  
+  // Efecto de lava burbujeante
+  for(let i=0; i<5; i++){
+    let x = Math.random() * canvas.width;
+    let y = canvas.height - 30 + Math.random() * 10;
+    let r = Math.random() * 10 + 5;
+    ctx.fillStyle = `rgba(255, ${Math.floor(80 + Math.random()*50)}, 0, ${Math.random()*0.5})`;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fill();
+  }
+  
+  // Gravedad
+  player.dy += 0.5;
+  player.x += player.dx;
+  player.y += player.dy;
+  
+  // Invincibilidad después de golpe (aumentado de 60 a 90 frames = 1.5 segundos)
+  if(player.invincible > 0) {
+    player.invincible--;
+    if(Math.floor(player.invincible / 5) % 2 === 0) {
+      ctx.globalAlpha = 0.5;
+    }
+  }
+  
+  // Limites del canvas
+  if(player.x < 0) player.x = 0;
+  if(player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+  
+  // Caer en lava
+  if(player.y + player.h > canvas.height - 30) {
+    createParticles(player.x + player.w/2, player.y + player.h/2, "#ff6600", 20);
+    lives--;
+    player.x = 50;
+    player.y = 400;
+    player.dy = 0;
+    player.invincible = 90; // 1.5 segundos de invencibilidad (antes era 60)
+    updateHUD();
+    showTip("¡Cuidado con la lava! (los errores del servidor)");
+    if(lives <= 0) endGame();
+  }
+  
+  // Colisiones plataformas
+  player.onGround = false;
+  platforms.forEach(p=>{
+    // Dibujar plataformas con efecto 3D
+    ctx.fillStyle = "#5D4037";
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    ctx.fillStyle = "#8D6E63";
+    ctx.fillRect(p.x, p.y-5, p.w, 5);
+    
+    if(collide(player,p)){
+      if(player.dy > 0 && player.y + player.h - player.dy <= p.y){
+        player.y = p.y - player.h;
+        player.dy = 0;
+        player.onGround = true;
+        player.jumping = false;
+        if(p.tip) showTip(p.tip);
+      }
+    }
+  });
+  
+  // Dibujar monedas (fragmentos de código)
+  coins.forEach((c,i)=>{
+    ctx.save();
+    ctx.translate(c.x, c.y);
+    ctx.rotate(Date.now() / 200 % Math.PI * 2);
+    ctx.fillStyle = "gold";
+    ctx.shadowColor = "yellow";
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.moveTo(0, -10);
+    for(let j=1; j<6; j++){
+      let angle = (Math.PI*2/5) * j;
+      ctx.lineTo(Math.sin(angle)*8, -Math.cos(angle)*8);
+      angle += Math.PI/5;
+      ctx.lineTo(Math.sin(angle)*4, -Math.cos(angle)*4);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+    
+    if(collide(player,{x:c.x-10,y:c.y-10,w:20,h:20})){
+      score += 10;
+      createParticles(c.x, c.y, "gold", 15);
+      if(c.tip) showTip(c.tip);
+      coins.splice(i,1);
+      updateHUD();
+    }
+  });
+  
+  // Obstáculos (bugs)
+  obstacles.forEach(o=>{
+    ctx.fillStyle = "#ff0000";
+    ctx.shadowColor = "red";
+    ctx.shadowBlur = 10;
+    ctx.fillRect(o.x, o.y, o.w, o.h);
+    ctx.shadowBlur = 0;
+    
+    // Dibujar antenas de bug
+    ctx.fillStyle = "black";
+    ctx.fillRect(o.x+5, o.y-10, 3, 10);
+    ctx.fillRect(o.x+o.w-8, o.y-10, 3, 10);
+    
+    o.x += o.dir * o.speed;
+    if(o.x < 0 || o.x + o.w > canvas.width) o.dir *= -1;
+    
+    if(collide(player,o) && player.invincible <= 0){
+      createParticles(player.x + player.w/2, player.y + player.h/2, "red", 20);
+      lives -= 1;
+      if(o.tip) showTip(o.tip);
+      player.x = 50; player.y = 400; player.dy = 0;
+      player.invincible = 90; // Aumentado de 60 a 90 frames
+      updateHUD();
+      if(lives <= 0) endGame();
+    }
+  });
+  
+  // Enemigos (errores)
+  enemies.forEach((e,i)=>{
+    // Mover enemigo en su plataforma
+    const platform = platforms[e.platform];
+    e.x += e.dir * e.speed;
+    
+    // Limitar movimiento a la plataforma
+    if(e.x < platform.x) {
+      e.x = platform.x;
+      e.dir *= -1;
+    }
+    if(e.x + e.w > platform.x + platform.w) {
+      e.x = platform.x + platform.w - e.w;
+      e.dir *= -1;
+    }
+    
+    // Dibujar enemigo
+    ctx.fillStyle = "#aa0000";
+    ctx.beginPath();
+    ctx.arc(e.x + e.w/2, e.y + e.h/2, e.w/2, 0, Math.PI*2);
+    ctx.fill();
+    
+    // Ojos del enemigo
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(e.x + e.w/3, e.y + e.h/3, e.w/8, 0, Math.PI*2);
+    ctx.arc(e.x + 2*e.w/3, e.y + e.h/3, e.w/8, 0, Math.PI*2);
+    ctx.fill();
+    
+    // Colisión con jugador
+    if(collide(player,e) && player.invincible <= 0){
+      createParticles(player.x + player.w/2, player.y + player.h/2, "red", 20);
+      lives -= 1;
+      if(e.tip) showTip(e.tip);
+      player.x = 50; player.y = 400; player.dy = 0;
+      player.invincible = 90; // Aumentado de 60 a 90 frames
+      updateHUD();
+      if(lives <= 0) endGame();
+    }
+  });
+  
+  // Jefe final
+  if(boss) {
+    // Mover jefe
+    boss.x += boss.dir * boss.speed;
+    if(boss.x < 0 || boss.x + boss.w > canvas.width) {
+      boss.dir *= -1;
+    }
+    
+    // Ataque del jefe
+    boss.attackCooldown--;
+    if(boss.attackCooldown <= 0) {
+      boss.attackCooldown = 80 + Math.random() * 60; // Aumentado el cooldown
+      
+      // Crear proyectiles de error
+      if(!boss.projectiles) boss.projectiles = [];
+      boss.projectiles.push({
+        x: boss.x + boss.w/2,
+        y: boss.y + boss.h,
+        w: 10,
+        h: 20,
+        speed: 4, // Reducida la velocidad de proyectiles
+        tip: "¡Error crítico! Esquivalo"
+      });
+    }
+    
+    // Dibujar jefe
+    ctx.fillStyle = "#990000";
+    ctx.shadowColor = "#ff0000";
+    ctx.shadowBlur = 15;
+    ctx.fillRect(boss.x, boss.y, boss.w, boss.h);
+    ctx.shadowBlur = 0;
+    
+    // Ojos del jefe
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(boss.x + boss.w/3, boss.y + boss.h/3, boss.w/6, 0, Math.PI*2);
+    ctx.arc(boss.x + 2*boss.w/3, boss.y + boss.h/3, boss.w/6, 0, Math.PI*2);
+    ctx.fill();
+    
+    // Boca del jefe
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(boss.x + boss.w/2, boss.y + 2*boss.h/3, boss.w/4, 0, Math.PI);
+    ctx.fill();
+    
+    // Actualizar proyectiles
+    if(boss.projectiles) {
+      for(let i = 0; i < boss.projectiles.length; i++) {
+        let p = boss.projectiles[i];
+        p.y += p.speed;
+        
+        // Dibujar proyectil
+        ctx.fillStyle = "#ff0000";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.w, 0, Math.PI*2);
+        ctx.fill();
+        
+        // Colisión con jugador
+        if(collide(player, p) && player.invincible <= 0) {
+          createParticles(player.x + player.w/2, player.y + player.h/2, "red", 20);
+          lives -= 1;
+          if(p.tip) showTip(p.tip);
+          player.x = 50; player.y = 400; player.dy = 0;
+          player.invincible = 90; // Aumentado de 60 a 90 frames
+          boss.projectiles.splice(i, 1);
+          i--;
+          updateHUD();
+          if(lives <= 0) endGame();
+          continue;
+        }
+        
+        // Eliminar proyectiles que salen de pantalla
+        if(p.y > canvas.height) {
+          boss.projectiles.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    
+    // Dañar al jefe saltando sobre él (como en Mario)
+    if(collide(player, boss) && player.dy < 0 && player.y + player.h - player.dy <= boss.y) {
+      boss.health--;
+      updateBossHealth();
+      player.dy = -10; // Rebote
+      createParticles(boss.x + boss.w/2, boss.y, "#ffffff", 30);
+      
+      if(boss.health <= 0) {
+        // Jefe derrotado
+        createParticles(boss.x + boss.w/2, boss.y + boss.h/2, "#ffffff", 100);
+        score += 100;
+        boss = null;
+        bossHealth.style.display = 'none';
+        showTip("¡Jefe derrotado! Ahora puedes llegar al endpoint final.");
+      }
+    }
+  }
+  
+  // Meta (endpoint)
+  ctx.fillStyle = "#4CAF50";
+  ctx.shadowColor = "#4CAF50";
+  ctx.shadowBlur = 15;
+  ctx.fillRect(goal.x, goal.y, goal.w, goal.h);
+  ctx.shadowBlur = 0;
+  
+  // Dibujar símbolo de check en la meta
+  ctx.fillStyle = "white";
+  ctx.font = "30px Arial";
+  ctx.fillText("✓", goal.x + 10, goal.y + 35);
+  
+  if(collide(player,goal) && (!boss || boss.health <= 0)){
+    createParticles(goal.x + goal.w/2, goal.y + goal.h/2, "#4CAF50", 30);
+    score += 50;
+    if(goal.tip) showTip(goal.tip);
+    if(coins.length === 0 && lives > 0){
+      score += 30; // Bonus por recoger todas las monedas
+    }
+    level++;
+    if(level >= levelData.length){
+      endGame();
+    } else {
+      loadLevel(level);
+      updateHUD();
+    }
+  }
+  
+  // Dibujar jugador (programador)
+  ctx.fillStyle = "#2196F3";
+  ctx.shadowColor = "#2196F3";
+  ctx.shadowBlur = 10;
+  ctx.fillRect(player.x, player.y, player.w, player.h);
+  ctx.shadowBlur = 0;
+  
+  // Dibujar cabeza
+  ctx.fillStyle = "#FFC107";
+  ctx.beginPath();
+  ctx.arc(player.x + player.w/2, player.y - 5, 10, 0, Math.PI*2);
+  ctx.fill();
+  
+  // Restaurar opacidad si estaba en modo invencible
+  ctx.globalAlpha = 1;
+  
+  // Actualizar partículas
+  updateParticles();
+  
+  // Controles
+  if(keys["ArrowLeft"] || keys["a"]) player.dx = -4;
+  else if(keys["ArrowRight"] || keys["d"]) player.dx = 4;
+  else player.dx = 0;
+  
+  if((keys["ArrowUp"] || keys["w"] || keys[" "]) && player.onGround && !player.jumping) {
+    player.dy = -12;
+    player.jumping = true;
+    createParticles(player.x + player.w/2, player.y + player.h, "#2196F3", 10);
+  }
+  
+  requestAnimationFrame(gameLoop);
+}
+
+function endGame(){
+  gameRunning = false;
+  document.getElementById('endScreen').style.display = 'flex';
+  document.getElementById('finalScore').innerText = `Puntaje final: ${score}`;
+  let medal;
+  if(score >= 400) {
+    medal = "🏅 Oro - ¡Eres un experto en Backend!";
+  } else if(score >= 250) {
+    medal = "🥈 Plata - ¡Gran trabajo!";
+  } else {
+    medal = "🥉 Bronce - ¡Sigue practicando!";
+  }
+  document.getElementById('finalMessage').innerText = `Has ganado medalla ${medal}`;
+}
+
+window.addEventListener("keydown",e=>{
+  keys[e.key] = true;
+  // Prevenir comportamiento por defecto de teclas de dirección y espacio
+  if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," ","w","a","s","d"].includes(e.key)) {
+    e.preventDefault();
+  }
+});
+window.addEventListener("keyup",e=>keys[e.key]=false);
+</script>
+</body>
+</html>
