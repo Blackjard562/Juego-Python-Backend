@@ -1,0 +1,206 @@
+[
+  {
+    "Pregunta": "¿Qué es el POS (Plan de Beneficios)?",
+    "Cantidad": 120
+  },
+  {
+    "Pregunta": "¿Cómo saber si un servicio está incluido en el POS?",
+    "Cantidad": 95
+  },
+  {
+    "Pregunta": "¿Qué servicios de promoción de salud incluye el POS?",
+    "Cantidad": 80
+  },
+  {
+    "Pregunta": "¿El POS cubre urgencias?",
+    "Cantidad": 150
+  },
+  {
+    "Pregunta": "¿El POS incluye servicios odontológicos?",
+    "Cantidad": 110
+  },
+  {
+    "Pregunta": "¿Qué medicamentos están cubiertos por el POS?",
+    "Cantidad": 130
+  },
+  {
+    "Pregunta": "¿Qué hacer si la EPS niega un servicio del POS?",
+    "Cantidad": 75
+  },
+  {
+    "Pregunta": "¿Se cubre el transporte del paciente?",
+    "Cantidad": 60
+  },
+  {
+    "Pregunta": "¿Qué tratamientos están excluidos del POS?",
+    "Cantidad": 85
+  },
+  {
+    "Pregunta": "¿El POS incluye atención en salud mental?",
+    "Cantidad": 70
+  },
+  {
+    "Pregunta": "¿Qué hacer si necesito un medicamento no POS?",
+    "Cantidad": 65
+  },
+  {
+    "Pregunta": "¿Cómo acceder al POS si no tengo afiliación?",
+    "Cantidad": 60
+  },
+  {
+    "Pregunta": "¿Qué cubre el POS en rehabilitación?",
+    "Cantidad": 72
+  },
+  {
+    "Pregunta": "¿Cómo sé si mi tratamiento está autorizado?",
+    "Cantidad": 68
+  },
+  {
+    "Pregunta": "¿Puedo reclamar medicamentos directamente en farmacias?",
+    "Cantidad": 100
+  },
+  {
+    "Pregunta": "¿El POS cubre tratamientos para enfermedades huérfanas?",
+    "Cantidad": 55
+  },
+  {
+    "Pregunta": "¿Cómo solicitar una segunda opinión médica?",
+    "Cantidad": 40
+  },
+  {
+    "Pregunta": "¿Se requiere autorización para servicios de urgencia?",
+    "Cantidad": 90
+  },
+  {
+    "Pregunta": "¿Qué vacunas están incluidas en el POS?",
+    "Cantidad": 110
+  },
+  {
+    "Pregunta": "¿El POS cubre procedimientos quirúrgicos?",
+    "Cantidad": 88
+  },
+  {
+    "Pregunta": "¿Los exámenes de laboratorio están incluidos?",
+    "Cantidad": 120
+  },
+  {
+    "Pregunta": "¿Qué servicios mentales requieren remisión?",
+    "Cantidad": 65
+  },
+  {
+    "Pregunta": "¿Las terapias de lenguaje están cubiertas?",
+    "Cantidad": 60
+  },
+  {
+    "Pregunta": "¿Puedo acceder a medicina especializada por el POS?",
+    "Cantidad": 75
+  },
+  {
+    "Pregunta": "¿El POS cubre atención domiciliaria?",
+    "Cantidad": 58
+  },
+  {
+    "Pregunta": "¿Cómo cambiar de EPS?",
+    "Cantidad": 85
+  },
+  {
+    "Pregunta": "¿Se incluye atención para enfermedades crónicas?",
+    "Cantidad": 90
+  },
+  {
+    "Pregunta": "¿Qué pruebas diagnósticas incluye el POS?",
+    "Cantidad": 110
+  },
+  {
+    "Pregunta": "¿El POS cubre anticoncepción?",
+    "Cantidad": 100
+  },
+  {
+    "Pregunta": "¿La atención para víctimas de violencia está cubierta?",
+    "Cantidad": 65
+  },
+  {
+    "Pregunta": "¿El POS incluye prótesis y órtesis?",
+    "Cantidad": 50
+  },
+  {
+    "Pregunta": "¿Quién define qué está cubierto por el POS?",
+    "Cantidad": 72
+  },
+  {
+    "Pregunta": "¿Las EPS deben cubrir lo que está en el POS?",
+    "Cantidad": 95
+  },
+  {
+    "Pregunta": "¿Cómo reportar un incumplimiento del POS?",
+    "Cantidad": 75
+  },
+  {
+    "Pregunta": "¿Las consultas médicas generales están cubiertas?",
+    "Cantidad": 125
+  },
+  {
+    "Pregunta": "¿El POS cubre atención integral en cáncer?",
+    "Cantidad": 60
+  },
+  {
+    "Pregunta": "¿Se puede acceder a servicios sin autorización médica?",
+    "Cantidad": 66
+  },
+  {
+    "Pregunta": "¿La atención odontológica incluye ortodoncia?",
+    "Cantidad": 45
+  },
+  {
+    "Pregunta": "¿Cómo acceder a servicios de salud mental?",
+    "Cantidad": 70
+  },
+  {
+    "Pregunta": "¿El POS cubre terapias ocupacionales?",
+    "Cantidad": 50
+  },
+  {
+    "Pregunta": "¿Puedo solicitar cambio de IPS?",
+    "Cantidad": 80
+  },
+  {
+    "Pregunta": "¿El POS incluye exámenes prenatales?",
+    "Cantidad": 95
+  },
+  {
+    "Pregunta": "¿Los medicamentos no disponibles en farmacias EPS qué hacer?",
+    "Cantidad": 78
+  },
+  {
+    "Pregunta": "¿Hay atención psicológica para adolescentes?",
+    "Cantidad": 55
+  },
+  {
+    "Pregunta": "¿El POS incluye salud visual?",
+    "Cantidad": 85
+  },
+  {
+    "Pregunta": "¿Cómo obtener una cita médica prioritaria?",
+    "Cantidad": 92
+  },
+  {
+    "Pregunta": "¿La atención de parto está cubierta?",
+    "Cantidad": 105
+  },
+  {
+    "Pregunta": "¿Los servicios en zonas rurales son cubiertos?",
+    "Cantidad": 45
+  },
+  {
+    "Pregunta": "¿El POS cubre exámenes especializados?",
+    "Cantidad": 66
+  },
+  {
+    "Pregunta": "¿La atención en salud mental incluye hospitalización?",
+    "Cantidad": 62
+  },
+  {
+    "Pregunta": "¿Se puede recibir atención sin estar afiliado?",
+    "Cantidad": 85
+  }
+]

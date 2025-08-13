@@ -1,0 +1,206 @@
+[
+  {
+    "Pregunta": "¿Qué es el POS (Plan de Beneficios)?",
+    "Respuesta": "Conjunto de servicios, medicamentos y procedimientos cubiertos por el sistema de salud."
+  },
+  {
+    "Pregunta": "¿Cómo saber si un servicio está incluido en el POS?",
+    "Respuesta": "Consultar el portal del Ministerio o tu EPS."
+  },
+  {
+    "Pregunta": "¿Qué servicios de promoción de salud incluye el POS?",
+    "Respuesta": "Vacunación, planificación familiar, control prenatal."
+  },
+  {
+    "Pregunta": "¿El POS cubre urgencias?",
+    "Respuesta": "Sí, sin importar si estás afiliado o no."
+  },
+  {
+    "Pregunta": "¿El POS incluye servicios odontológicos?",
+    "Respuesta": "Sí, como exodoncia, limpieza dental, caries y prótesis."
+  },
+  {
+    "Pregunta": "¿Qué medicamentos están cubiertos por el POS?",
+    "Respuesta": "Medicamentos esenciales con registro y prescritos por profesionales."
+  },
+  {
+    "Pregunta": "¿Qué hacer si la EPS niega un servicio del POS?",
+    "Respuesta": "Presentar queja ante la SuperSalud o acudir al Comité Técnico Científico."
+  },
+  {
+    "Pregunta": "¿Se cubre el transporte del paciente?",
+    "Respuesta": "Sí, si el servicio requerido no está disponible localmente."
+  },
+  {
+    "Pregunta": "¿Qué tratamientos están excluidos del POS?",
+    "Respuesta": "Estéticos, sin registro sanitario, no aprobados por el INVIMA."
+  },
+  {
+    "Pregunta": "¿El POS incluye atención en salud mental?",
+    "Respuesta": "Psiquiatría, psicología, hospitalización y medicamentos."
+  },
+  {
+    "Pregunta": "¿Qué hacer si necesito un medicamento no POS?",
+    "Respuesta": "Puede solicitarse al Comité Técnico Científico."
+  },
+  {
+    "Pregunta": "¿Cómo acceder al POS si no tengo afiliación?",
+    "Respuesta": "Servicios de urgencia se prestan sin afiliación."
+  },
+  {
+    "Pregunta": "¿Qué cubre el POS en rehabilitación?",
+    "Respuesta": "Terapias físicas, ocupacionales y de lenguaje."
+  },
+  {
+    "Pregunta": "¿Cómo sé si mi tratamiento está autorizado?",
+    "Respuesta": "Consultando con la EPS o revisando el listado POS."
+  },
+  {
+    "Pregunta": "¿Puedo reclamar medicamentos directamente en farmacias?",
+    "Respuesta": "Sí, si están autorizados por la EPS y prescritos por médico tratante."
+  },
+  {
+    "Pregunta": "¿El POS cubre tratamientos para enfermedades huérfanas?",
+    "Respuesta": "Depende del diagnóstico y puede requerir autorización especial."
+  },
+  {
+    "Pregunta": "¿Cómo solicitar una segunda opinión médica?",
+    "Respuesta": "A través de tu EPS, especialmente en casos complejos."
+  },
+  {
+    "Pregunta": "¿Se requiere autorización para servicios de urgencia?",
+    "Respuesta": "No. La atención inicial siempre se brinda."
+  },
+  {
+    "Pregunta": "¿Qué vacunas están incluidas en el POS?",
+    "Respuesta": "Todas las del esquema nacional de vacunación."
+  },
+  {
+    "Pregunta": "¿El POS cubre procedimientos quirúrgicos?",
+    "Respuesta": "Sí, si están indicados y tienen aprobación médica."
+  },
+  {
+    "Pregunta": "¿Los exámenes de laboratorio están incluidos?",
+    "Respuesta": "Sí, según necesidad médica y diagnóstico."
+  },
+  {
+    "Pregunta": "¿Qué servicios mentales requieren remisión?",
+    "Respuesta": "Todos excepto urgencias psicológicas."
+  },
+  {
+    "Pregunta": "¿Las terapias de lenguaje están cubiertas?",
+    "Respuesta": "Sí, según evaluación médica."
+  },
+  {
+    "Pregunta": "¿Puedo acceder a medicina especializada por el POS?",
+    "Respuesta": "Sí, previa remisión de médico general."
+  },
+  {
+    "Pregunta": "¿El POS cubre atención domiciliaria?",
+    "Respuesta": "Sí, en pacientes con limitaciones físicas o casos crónicos."
+  },
+  {
+    "Pregunta": "¿Cómo cambiar de EPS?",
+    "Respuesta": "Solicitando el traslado en línea o presencialmente."
+  },
+  {
+    "Pregunta": "¿Se incluye atención para enfermedades crónicas?",
+    "Respuesta": "Sí, con seguimiento y control continuo."
+  },
+  {
+    "Pregunta": "¿Qué pruebas diagnósticas incluye el POS?",
+    "Respuesta": "Imagenología, laboratorio clínico y funcionales básicas."
+  },
+  {
+    "Pregunta": "¿El POS cubre anticoncepción?",
+    "Respuesta": "Sí, incluye métodos de planificación familiar."
+  },
+  {
+    "Pregunta": "¿La atención para víctimas de violencia está cubierta?",
+    "Respuesta": "Sí, con atención prioritaria e integral."
+  },
+  {
+    "Pregunta": "¿El POS incluye prótesis y órtesis?",
+    "Respuesta": "En ciertos casos clínicos debidamente evaluados."
+  },
+  {
+    "Pregunta": "¿Quién define qué está cubierto por el POS?",
+    "Respuesta": "El Ministerio de Salud y el sistema de regulación."
+  },
+  {
+    "Pregunta": "¿Las EPS deben cubrir lo que está en el POS?",
+    "Respuesta": "Sí, es obligatorio por ley."
+  },
+  {
+    "Pregunta": "¿Cómo reportar un incumplimiento del POS?",
+    "Respuesta": "A través de la Superintendencia de Salud."
+  },
+  {
+    "Pregunta": "¿Las consultas médicas generales están cubiertas?",
+    "Respuesta": "Sí, para control, diagnóstico y remisión."
+  },
+  {
+    "Pregunta": "¿El POS cubre atención integral en cáncer?",
+    "Respuesta": "Sí, incluye diagnóstico, tratamiento y seguimiento."
+  },
+  {
+    "Pregunta": "¿Se puede acceder a servicios sin autorización médica?",
+    "Respuesta": "No, salvo en casos de urgencia."
+  },
+  {
+    "Pregunta": "¿La atención odontológica incluye ortodoncia?",
+    "Respuesta": "No, salvo en casos funcionales específicos."
+  },
+  {
+    "Pregunta": "¿Cómo acceder a servicios de salud mental?",
+    "Respuesta": "A través de consulta médica o atención prioritaria."
+  },
+  {
+    "Pregunta": "¿El POS cubre terapias ocupacionales?",
+    "Respuesta": "Sí, con orden médica."
+  },
+  {
+    "Pregunta": "¿Puedo solicitar cambio de IPS?",
+    "Respuesta": "Sí, gestionándolo con la EPS correspondiente."
+  },
+  {
+    "Pregunta": "¿El POS incluye exámenes prenatales?",
+    "Respuesta": "Sí, como parte del control prenatal obligatorio."
+  },
+  {
+    "Pregunta": "¿Los medicamentos no disponibles en farmacias EPS qué hacer?",
+    "Respuesta": "Solicitar gestión de disponibilidad a la EPS."
+  },
+  {
+    "Pregunta": "¿Hay atención psicológica para adolescentes?",
+    "Respuesta": "Sí, como parte del enfoque poblacional."
+  },
+  {
+    "Pregunta": "¿El POS incluye salud visual?",
+    "Respuesta": "Consultas, lentes básicos y tratamiento de patologías."
+  },
+  {
+    "Pregunta": "¿Cómo obtener una cita médica prioritaria?",
+    "Respuesta": "Contactando directamente tu IPS o EPS según el caso."
+  },
+  {
+    "Pregunta": "¿La atención de parto está cubierta?",
+    "Respuesta": "Sí, incluyendo controles prenatales y hospitalización."
+  },
+  {
+    "Pregunta": "¿Los servicios en zonas rurales son cubiertos?",
+    "Respuesta": "Sí, con adecuación territorial."
+  },
+  {
+    "Pregunta": "¿El POS cubre exámenes especializados?",
+    "Respuesta": "Sí, bajo remisión y necesidad médica comprobada."
+  },
+  {
+    "Pregunta": "¿La atención en salud mental incluye hospitalización?",
+    "Respuesta": "Sí, cuando hay riesgo clínico."
+  },
+  {
+    "Pregunta": "¿Se puede recibir atención sin estar afiliado?",
+    "Respuesta": "En urgencias sí. Para atención continua se requiere afiliación."
+  }
+]

@@ -1,0 +1,286 @@
+[
+  {
+    "Pregunta": "¿Qué es el POS (Plan de Beneficios)?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo saber si un servicio está incluido en el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué servicios de promoción de salud incluye el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre urgencias?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS incluye servicios odontológicos?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué medicamentos están cubiertos por el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué hacer si la EPS niega un servicio del POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Se cubre el transporte del paciente?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué tratamientos están excluidos del POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS incluye atención en salud mental?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué hacer si necesito un medicamento no POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo acceder al POS si no tengo afiliación?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué cubre el POS en rehabilitación?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo sé si mi tratamiento está autorizado?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Puedo reclamar medicamentos directamente en farmacias?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre tratamientos para enfermedades huérfanas?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo solicitar una segunda opinión médica?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Se requiere autorización para servicios de urgencia?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué vacunas están incluidas en el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre procedimientos quirúrgicos?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Los exámenes de laboratorio están incluidos?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué servicios mentales requieren remisión?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Las terapias de lenguaje están cubiertas?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Puedo acceder a medicina especializada por el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre atención domiciliaria?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo cambiar de EPS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Se incluye atención para enfermedades crónicas?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Qué pruebas diagnósticas incluye el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre anticoncepción?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿La atención para víctimas de violencia está cubierta?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS incluye prótesis y órtesis?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Quién define qué está cubierto por el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Las EPS deben cubrir lo que está en el POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo reportar un incumplimiento del POS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Las consultas médicas generales están cubiertas?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre atención integral en cáncer?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Se puede acceder a servicios sin autorización médica?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿La atención odontológica incluye ortodoncia?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo acceder a servicios de salud mental?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre terapias ocupacionales?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Puedo solicitar cambio de IPS?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS incluye exámenes prenatales?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Los medicamentos no disponibles en farmacias EPS qué hacer?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Hay atención psicológica para adolescentes?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS incluye salud visual?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cómo obtener una cita médica prioritaria?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿La atención de parto está cubierta?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Los servicios en zonas rurales son cubiertos?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿El POS cubre exámenes especializados?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿La atención en salud mental incluye hospitalización?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Se puede recibir atención sin estar afiliado?",
+    "Tipo_de_Agente": "FAQ"
+  },
+  {
+    "Pregunta": "¿Cuántas interacciones totales hay registradas?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la pregunta que más veces se ha recibido?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "#¡REF!",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas interacciones corresponden a consultas de trámites?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la proporción de preguntas sobre afiliación?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas preguntas tienen más de 50 interacciones?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas preguntas tienen menos de 10 interacciones?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la categoría con más preguntas recibidas?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas preguntas superan el promedio de interacciones?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas interacciones pertenecen a las tres preguntas más frecuentes?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la pregunta menos frecuente?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la tasa de crecimiento de interacciones respecto al periodo anterior? (sin especificar tiempo)",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántos usuarios repiten la misma pregunta más de una vez?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas interacciones se registraron por categoría?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es la distribución de interacciones por tipo de consulta?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es el porcentaje de preguntas sobre servicios de salud?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas interacciones corresponden a consultas sobre costos?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuál es el promedio de interacciones por pregunta?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas preguntas tienen una cantidad inferior al promedio?",
+    "Tipo_de_Agente": "Cuantitativo"
+  },
+  {
+    "Pregunta": "¿Cuántas preguntas superan el doble del promedio de interacciones?",
+    "Tipo_de_Agente": "Cuantitativo"
+  }
+]
